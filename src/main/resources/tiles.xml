@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="base-difinition" template="/WEB-INF/views/layouts/defautLayout.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp" />
+    <put-attribute name="body" value="" />
+  </definition>
+  <definition name="admin-difinition" template="/WEB-INF/views/layouts/defautLayoutAdmin.jsp">
+    <put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/layouts/menu.jsp" />
+    <put-attribute name="body" value="" />
+  </definition>
+  <!-- base-difinition -->
+  <definition name="home" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/home.jsp"/>
+  </definition>
+  <definition name="signUp" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/signUp.jsp"/>
+  </definition>
+  <definition name="signIn" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/signIn.jsp"/>
+  </definition>
+  <definition name="information" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/user/information.jsp"/>
+  </definition>
+  <definition name="changePassword" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/user/changePassword.jsp"/>
+  </definition>
+  <definition name="editCV" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/user/editCV.jsp"/>
+  </definition>
+  <definition name="topcv" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/topcv.jsp"/>
+  </definition>
+  
+  <!-- basic page -->
+  <definition name="cvUser" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/cvUser.jsp"/>
+  </definition>
+  <definition name="error" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/error.jsp"/>
+  </definition>
+  <definition name="deny" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/deny.jsp"/>
+  </definition>
+  
+  <!-- admin-difinition -->
+  <definition name="listUser" extends="admin-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/admin/listUser.jsp"/>
+  </definition>
+  <definition name="userInformation" extends="admin-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/admin/userInformation.jsp"/>
+  </definition>
+</tiles-definitions>
