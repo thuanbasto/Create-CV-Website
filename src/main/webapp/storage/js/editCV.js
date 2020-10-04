@@ -7,6 +7,7 @@ saveAll.addEventListener("click", () => {
     let data = [];
     document.querySelectorAll(".cardSkill").forEach((cardSkill) =>{
     	let skillName = cardSkill.children[0].children[0].value;
+    	if (skillName == "" || skillName == null) return;
         let typeDisplay = cardSkill.children[0].children[1].children[0].value;
         let indexDisplay = cardSkill.classList[2] == 'left'?1:2;;
         let listDetailSkill = cardSkill.children[1].getElementsByTagName("input");

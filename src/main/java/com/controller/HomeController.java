@@ -52,7 +52,7 @@ public class HomeController {
 	public String cvUser(@PathVariable(name="username", required=false) String username, HttpServletRequest request) {
 		if (username != null) {
 			try {
-				UserDTO user = userService.getUserByUserName(username);
+				UserDTO user = userService.getUsersWithLikes(username);
 				List<SkillDTO> listSkill = skillService.getAllSkillsByUserId(user.getUser_ID());
 				for (SkillDTO skillDTO : listSkill) {
 					skillDTO.setDetailSkills(detailSkillService.getAllDetailSkillsBySkillId(skillDTO.getSkill_ID()));

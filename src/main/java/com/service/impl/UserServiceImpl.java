@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,6 @@ public class UserServiceImpl implements UserService{
 		userDTO.setPassword(user.getPassword());
 		userDTO.setMaxim(user.getMaxim());
 		userDTO.setCareer(user.getCareer());
-		userDTO.setLikes(likeService.countLike(user.getUser_ID()));
 		
 		return userDTO;
 	}
@@ -144,6 +144,27 @@ public class UserServiceImpl implements UserService{
 		userDao.updateUser(user);
 	}
 
+	@Override
+	public UserDTO getUsersWithLikes(String username) {
+		Object[] user = userDao.getUsersWithLikes(username);
+		UserDTO userDTO = new UserDTO();
+		
+		userDTO.setUser_ID((int) user[0]);
+		userDTO.setName(String.valueOf(user[1]));
+		userDTO.setAddress(String.valueOf(user[2]));
+		userDTO.setBirthday((Date) user[3]);
+		userDTO.setPhone(String.valueOf(user[4]));
+		userDTO.setEmail(String.valueOf(user[5]));
+		userDTO.setCareer(String.valueOf(user[6]));
+		userDTO.setMaxim(String.valueOf(user[7]));
+		userDTO.setFacebook(String.valueOf(user[8]));
+		userDTO.setImageUrl(String.valueOf(user[9]));
+		userDTO.setUsername(String.valueOf(user[10]));
+		userDTO.setLikes((Long) user[11]);
+		
+		return userDTO;
+	}
+	
 	public List<UserDTO> getAllUsersWithLikes() {
 		List<Object[]> listUser = userDao.getAllUsersWithLikes();
 		List<UserDTO> listUserDTO = new ArrayList<UserDTO>();
@@ -159,4 +180,5 @@ public class UserServiceImpl implements UserService{
 		}
 		return listUserDTO;
 	}
+
 }

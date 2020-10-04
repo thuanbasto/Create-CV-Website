@@ -41,7 +41,7 @@
         <div class="row m-1 mt-3">
             <div class="col">
                 <button type="button" onclick="addSkill(this)" class="btnAddLeft mb-3 btn btn-outline-success">Add</button>
-                <button type="button" style="float: right;" class="saveAll mb-3 btn btn-outline-success">Save All</button>
+                <button type="button" class="saveAll mb-3 btn btn-outline-success float-right">Save All</button>
                 <c:forEach items="${user.skills}" var="skill">
                 <c:if test="${skill.indexDisplay == 1}">
 	                <div class="cardSkill mb-3 left">

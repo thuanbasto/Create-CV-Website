@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="like bg-white">
-        <label>${user.likes}</label>
+        <label>${user.likes}</label><span><i class="far fa-thumbs-up"></i></span>
         <security:authorize access="isAuthenticated()">
 			<button type="button" onclick="likeCV(this)" class="btnLike btn btn-primary">Like</button>
 		</security:authorize>
@@ -34,21 +34,36 @@
             </div>
         </div>
         <ul class="midrow nav justify-content-center">
-            <li class="nav-item">
-                <p class="col-auto ml-4 m-2 text-white"><i class="far fa-envelope"></i> ${user.email}</p>
-            </li>
-            <li class="nav-item">
-                <p class="col ml-3 m-2 text-white"><i class="fas fa-mobile-alt"></i> ${user.phone}</p>
-            </li>
-            <li class="nav-item">
-                <p class="col ml-3 m-2 text-white"><i class="fas fa-map-marker-alt"></i> ${user.address}</p>
-            </li>
-            <li class="nav-item">
-                <p class="col ml-3 m-2 text-white"><i class="far fa-calendar-alt"></i> ${user.birthday}</p>
-            </li>
-            <li class="nav-item">
-                <p class="col-auto m-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p>
-            </li>
+        	<c:if test="${!empty user.email}">
+	            <li class="nav-item">
+	                <p class="col-auto ml-4 m-2 text-white"><i class="far fa-envelope"></i> ${user.email}</p>
+	            </li>
+        	</c:if>
+        	<c:if test="${!empty user.phone}">
+	            <li class="nav-item">
+	                <p class="col ml-3 m-2 text-white"><i class="fas fa-mobile-alt"></i> ${user.phone}</p>
+	            </li>
+        	</c:if>
+        	<c:if test="${!empty user.address}">
+	            <li class="nav-item">
+	                <p class="col ml-3 m-2 text-white"><i class="fas fa-map-marker-alt"></i> ${user.address}</p>
+	            </li>
+        	</c:if>
+        	<c:if test="${!empty user.birthday}">
+	            <li class="nav-item">
+	                <p class="col ml-3 m-2 text-white"><i class="far fa-calendar-alt"></i> ${user.birthday}</p>
+	            </li>
+        	</c:if>
+  <%--       	<c:if test="${!empty user.facebook}">
+	            <li class="nav-item">
+	                <p class="col-auto m-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p>
+	            </li>
+        	</c:if> --%>
+        	<c:if test="${!empty user.facebook}">
+	            <li class="nav-item">
+	                <a href="https://${user.facebook}" target="_blank"><p class="col-auto m-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p></a>
+	            </li>
+        	</c:if>
         </ul>
         <div class="row m-1 mt-3">
             <div class="col">

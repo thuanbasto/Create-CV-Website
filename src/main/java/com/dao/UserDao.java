@@ -11,6 +11,7 @@ public interface UserDao {
 	public User getUserById(int id);
 	public User getUserByUserName(String username);
 	public List<User> getAllUsers();
+	public Object[] getUsersWithLikes(String username);
 	public List<Object[]> getAllUsersWithLikes();
 	public boolean checkUsername(String username);
 }

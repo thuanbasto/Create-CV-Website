@@ -12,6 +12,7 @@ public interface UserService {
 	public UserDTO getUserById(int id);
 	public UserDTO getUserByUserName(String username);
 	public List<UserDTO> getAllUsers();
+	public UserDTO getUsersWithLikes(String username);
 	public List<UserDTO> getAllUsersWithLikes();
 	public boolean checkUsername(String username);
 	public void setUserDTO(UserDTO userDTO,UserDTO user);

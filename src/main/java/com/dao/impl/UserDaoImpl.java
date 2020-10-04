@@ -67,6 +67,23 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@SuppressWarnings("rawtypes")
+	public Object[] getUsersWithLikes(String username) {
+		try {
+			Query query = sessionFactory.getCurrentSession()
+					.createQuery("SELECT u.user_ID,u.name,u.address,u.birthday,u.phone,u.email,u.career,u.maxim,u.facebook,u.imageUrl,u.username,Count(l.user2) FROM com.entity.User u,com.entity.Like l "
+					+ "WHERE u.user_ID = l.user2 AND u.username =: username "
+					+ "GROUP BY u.user_ID "
+					+ "HAVING Count(l.user2) > 0")
+					.setParameter("username", username);
+			Object[] user = (Object[]) query.uniqueResult();	
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("rawtypes")
 	public List<Object[]> getAllUsersWithLikes() {
 		try {
 			Query query = sessionFactory.getCurrentSession()
