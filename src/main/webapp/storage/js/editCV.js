@@ -1,7 +1,25 @@
 const saveAll = document.querySelector(".saveAll");
 const popup = document.querySelector(".popup");
+const typecv_ID = document.querySelector("#typecv_ID");
 
 popup.setAttribute('style', 'display:none !important');
+
+function changeColor(el){
+    midrow.style.backgroundColor = el.value
+    typeDisplay2.forEach(li =>{
+        li.style.backgroundColor = el.value
+    })
+}
+
+function changeTypeCV(el){
+    if (confirm('Are you sure want to change type of CV? Dont forget to click button SaveAll before change.') === false)
+        return ;
+    if (el.value == 1){
+    	window.location.replace("/CV/user/editCV/1");
+    } else {
+    	window.location.replace("/CV/user/editCV/2");
+    }
+}
 
 saveAll.addEventListener("click", () => {
     let data = [];
@@ -32,6 +50,13 @@ saveAll.addEventListener("click", () => {
         method: 'POST',
         url: '/CV/addSkill',
         data: { "listSkill": data }
+    })
+    
+    let url_cv = '/CV/updateTypeCV/'+typecv_ID.value;
+    axios({
+        method: 'POST',
+        url: url_cv,
+        data: {}
     })
     
     popup.setAttribute('style', 'display:inline !important');

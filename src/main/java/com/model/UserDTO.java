@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.entity.Typecv;
+
 public class UserDTO {
 	private int user_ID;
 
@@ -38,6 +40,7 @@ public class UserDTO {
 
 	private List<SkillDTO> skills;
 
+	private Typecv typecv;
 	
 	public UserDTO() {
 	}
@@ -172,5 +175,13 @@ public class UserDTO {
 
 	public void setLikes(long likes) {
 		this.likes = likes;
+	}
+
+	public Typecv getTypecv() {
+		return typecv;
+	}
+
+	public void setTypecv(Typecv typecv) {
+		this.typecv = typecv;
 	}
 }

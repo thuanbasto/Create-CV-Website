@@ -12,16 +12,8 @@
     <put-attribute name="menu" value="/WEB-INF/views/layouts/menu.jsp" />
     <put-attribute name="body" value="" />
   </definition>
-  <!-- base-difinition -->
-  <definition name="home" extends="base-difinition">
-  	<put-attribute name="body" value="/WEB-INF/views/home/home.jsp"/>
-  </definition>
-  <definition name="signUp" extends="base-difinition">
-  	<put-attribute name="body" value="/WEB-INF/views/home/signUp.jsp"/>
-  </definition>
-  <definition name="signIn" extends="base-difinition">
-  	<put-attribute name="body" value="/WEB-INF/views/home/signIn.jsp"/>
-  </definition>
+  
+  <!-- user-difinition -->
   <definition name="information" extends="base-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/user/information.jsp"/>
   </definition>
@@ -31,11 +23,23 @@
   <definition name="editCV" extends="base-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/user/editCV.jsp"/>
   </definition>
+  <definition name="editCV2" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/user/editCV2.jsp"/>
+  </definition>
   <definition name="topcv" extends="base-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/home/topcv.jsp"/>
   </definition>
   
   <!-- basic page -->
+  <definition name="home" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/home.jsp"/>
+  </definition>
+  <definition name="signUp" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/signUp.jsp"/>
+  </definition>
+  <definition name="signIn" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/signIn.jsp"/>
+  </definition>
   <definition name="cvUser" extends="base-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/home/cvUser.jsp"/>
   </definition>

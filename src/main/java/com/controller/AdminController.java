@@ -39,4 +39,16 @@ public class AdminController {
 		userService.deleteUser(id);
 		return "redirect:/admin/listUser";
 	}
+	
+	@GetMapping("/ban/{user_ID}")
+	public String banUser(@PathVariable(name="user_ID") int id) {
+		userService.banUser(id);
+		return "redirect:/admin/listUser";
+	}
+	
+	@GetMapping("/unban/{user_ID}")
+	public String unBanUser(@PathVariable(name="user_ID") int id) {
+		userService.unBanUser(id);
+		return "redirect:/admin/listUser";
+	}
 }

@@ -10,7 +10,58 @@
     <link rel="stylesheet" href="<c:url value="/static/css/cvUser.css"/>">
 </head>
 <body>
+	<div class="customize p-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light m-0 p-2">
+            <div class="navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item m-1">
+                        <div class="icon dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Icon
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            </div>
+                          </div>
+                    </li>
+                    <li class="nav-item m-1">
+                        <div class="font dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Font
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            </div>
+                          </div>
+                    </li>
+                    <li class="nav-item m-1">
+                        <div class="color dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Color
+                            </button>
+                            <div class="dropdown-menu m-auto p-auto" aria-labelledby="dropdownMenuButton">
+                              <button class="dropdown-item" value="#479099" onclick="changeColor(this)">Green</button>
+                              <button class="dropdown-item" value="#1a9fc1" onclick="changeColor(this)">Blue</button>
+                              <button class="dropdown-item" value="Black" onclick="changeColor(this)">Black</button>
+                            </div>
+                          </div>
+                    </li>
+                    <li class="nav-item m-1">
+                        <div class="typecv dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Type CV
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item" value="1" onclick="changeTypeCV(this)">Type CV 1</button>
+                                <button class="dropdown-item" value="2" onclick="changeTypeCV(this)">Type CV 2</button>
+                            </div>
+                          </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
     <div class="bg-white">
+    	<input type="hidden" id="typecv_ID" value="1">
         <div class="row m-4 pt-5">
             <div class="col-auto">
                 <img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
@@ -105,7 +156,7 @@
     </div>
     <div class="popup" aria-live="polite" aria-atomic="true" style="position: relative; min-height: 100px;">
         <div style="position: absolute; top: 50%; right: 50%; transform: translate(40%,-50%); z-index: 2;">
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
                 <div class="toast-header">
                     <strong class="mr-auto">Notice</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">

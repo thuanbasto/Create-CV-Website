@@ -7,8 +7,11 @@ import com.model.UserDTO;
 public interface UserService {
 	public void addUser(UserDTO userDTO);
 	public void updateUser(UserDTO userDTO);
+	public void updateUserWithTypecv(UserDTO userDTO);
 	public void updatePassword(UserDTO userDTO);
 	public void deleteUser(int id);
+	public void banUser(int id);
+	public void unBanUser(int id);
 	public UserDTO getUserById(int id);
 	public UserDTO getUserByUserName(String username);
 	public List<UserDTO> getAllUsers();

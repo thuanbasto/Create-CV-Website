@@ -31,7 +31,7 @@ CREATE TABLE `detailskill` (
   PRIMARY KEY (`DetailSkill_ID`),
   KEY `detailskill_ibfk_1` (`Skill_ID`),
   CONSTRAINT `detailskill_ibfk_1` FOREIGN KEY (`Skill_ID`) REFERENCES `skill` (`Skill_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `detailskill` (
 
 LOCK TABLES `detailskill` WRITE;
 /*!40000 ALTER TABLE `detailskill` DISABLE KEYS */;
-INSERT INTO `detailskill` VALUES (113,'English',73),(114,'Japanese',73),(115,'Quét rác',74),(116,'Education University (2017-2021)',75),(117,'FPT',75),(118,'Thai Phien',75),(119,'Agoda',75),(120,'ABC',75),(121,'Java',76),(122,'HTML,CSS',76),(123,'Spring MVC',76),(124,'Music',77);
+INSERT INTO `detailskill` VALUES (113,'English',73),(114,'Japanese',73),(115,'Quét rác',74),(135,'Education University (2017-2021)',82),(136,'FPT',82),(137,'Thai Phien',82),(138,'Agoda',82),(139,'ABC',82),(140,'Java',83),(141,'HTML,CSS',83),(142,'Spring MVC',83),(143,'Music',84),(153,'abc',94),(154,'b',94),(155,'b',95),(156,'Su Pham',96),(157,'3',97),(158,'5',98);
 /*!40000 ALTER TABLE `detailskill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,9 +58,9 @@ CREATE TABLE `likecv` (
   PRIMARY KEY (`like_ID`),
   KEY `from_user_ID` (`from_user_ID`),
   KEY `to_user_ID` (`to_user_ID`),
-  CONSTRAINT `likecv_ibfk_1` FOREIGN KEY (`from_user_ID`) REFERENCES `user` (`user_ID`),
-  CONSTRAINT `likecv_ibfk_2` FOREIGN KEY (`to_user_ID`) REFERENCES `user` (`user_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `likecv_ibfk_1` FOREIGN KEY (`from_user_ID`) REFERENCES `user` (`user_ID`) ON DELETE CASCADE,
+  CONSTRAINT `likecv_ibfk_2` FOREIGN KEY (`to_user_ID`) REFERENCES `user` (`user_ID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `likecv` (
 
 LOCK TABLES `likecv` WRITE;
 /*!40000 ALTER TABLE `likecv` DISABLE KEYS */;
-INSERT INTO `likecv` VALUES (10,47,40),(13,1,1),(15,47,1),(16,1,43),(17,1,44),(18,1,45),(19,1,47);
+INSERT INTO `likecv` VALUES (16,1,43),(21,1,1),(24,49,49),(25,49,1),(26,51,1),(27,51,51);
 /*!40000 ALTER TABLE `likecv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `skill` (
   PRIMARY KEY (`Skill_ID`),
   KEY `skill_FK_idx` (`user_ID`),
   CONSTRAINT `skill_FK` FOREIGN KEY (`user_ID`) REFERENCES `user` (`user_ID`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,8 +98,33 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (73,'Language','1',1,43),(74,'Exp','1',2,43),(75,'Education','1',1,1),(76,'Technical','2',2,1),(77,'Interests','1',2,1);
+INSERT INTO `skill` VALUES (73,'Language','1',1,43),(74,'Exp','1',2,43),(82,'Education','1',1,1),(83,'Technical','2',2,1),(84,'Interests','1',2,1),(94,'Technical','1',1,49),(95,'Experience','2',2,49),(96,'School','1',2,49),(97,'12','1',2,49),(98,'4','1',2,49);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `typecv`
+--
+
+DROP TABLE IF EXISTS `typecv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `typecv` (
+  `typecv_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `typename` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `descr` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  PRIMARY KEY (`typecv_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `typecv`
+--
+
+LOCK TABLES `typecv` WRITE;
+/*!40000 ALTER TABLE `typecv` DISABLE KEYS */;
+INSERT INTO `typecv` VALUES (1,'Default 1','Default'),(2,'Default 2','Default');
+/*!40000 ALTER TABLE `typecv` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -124,8 +149,11 @@ CREATE TABLE `user` (
   `password` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `role` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `enabled` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`user_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `typecv_ID` int(10) DEFAULT NULL,
+  PRIMARY KEY (`user_ID`),
+  KEY `typecv_ID` (`typecv_ID`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`typecv_ID`) REFERENCES `typecv` (`typecv_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +162,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Trần Minh Thuận','Đà Nẵng','1999-06-12','0775461753','thuantran1269@gmail.com','Student','Learn as much as possible and do my best in order to complete my tasks.','fb.com/thuanbasto','thuan.jpg','thuan','$2a$10$IXVxYXUGOokDx.EUnAT5XuEinNfDT7Y6Vn5iiLi0en46J08leZRsm','ROLE_ADMIN',1),(40,'Thuận Đẹp Trai','20 Con Mèo','1999-06-12','0775461753','thuanhuhu@gmail.com','Professor','Learn.','fb.com/thuanbasto',NULL,'thuan1','$2a$10$lLFnqNLeYPwYOuWX3iC9oueP7BOFlVy41hStwTMTuO5nHphogiYXu','ROLE_USER',1),(43,'Nguyễn Tô Châu','723 Nguyễn Tất Thành','1999-05-01','0344199529','tochau2016@gmail.com','Student','Có làm thì mới có ăn.','fb.com/MeowMeow01051999','tochau113.jpg','tochau113','$2a$10$zHwJEqhEkkk0WQfbY1kCS.mTnnc2DlHMFJKRCYNJ3TaRq0ImtDSq.','ROLE_USER',1),(44,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'thanh.jpg','congthanh','$2a$10$zbO1Ynmt7W9LQWGVHlOtYOBA.BgienxwdOKMU.lg.w6Kp0IFjE4h2','ROLE_USER',1),(45,'a','','1999-06-12','','','','','','thuan2.jpg','thuan2','$2a$10$25BxfZgYjMNkWKTd86rkRubNPhJXwWRS42VBukvSDyTGScbmmB6kC','ROLE_USER',1),(47,'Thuan','','1999-06-12','','aa@gmail.com','','','','thuan3.png','thuan3','$2a$10$IXVxYXUGOokDx.EUnAT5XuEinNfDT7Y6Vn5iiLi0en46J08leZRsm','ROLE_USER',1),(48,'Trần Văn Tèo','','1999-06-12','','teo@gmail.com','','','','qweqwe.png','qweqwe','$2a$10$.6nwAhBU3CyVirELzRTKKeSSN5726VWxan6rjuvevXIta5I4SVXtC','ROLE_USER',1);
+INSERT INTO `user` VALUES (1,'Trần Minh Thuận','Đà Nẵng','1999-06-12','0775461753','thuantran1269@gmail.com','Student','Learn as much as possible and do my best in order to complete my tasks.','fb.com/thuanbasto','thuan.jpg','thuan','$2a$10$IXVxYXUGOokDx.EUnAT5XuEinNfDT7Y6Vn5iiLi0en46J08leZRsm','ROLE_ADMIN',1,2),(40,'Thuận Đẹp Trai','20 Con Mèo','1999-06-12','0775461753','thuanhuhu@gmail.com','Professor','Learn.','fb.com/thuanbasto',NULL,'thuan1','$2a$10$lLFnqNLeYPwYOuWX3iC9oueP7BOFlVy41hStwTMTuO5nHphogiYXu','ROLE_USER',1,1),(43,'Nguyễn Tô Châu','723 Nguyễn Tất Thành','1999-05-01','0344199529','tochau2016@gmail.com','Student','Có làm thì mới có ăn.','fb.com/MeowMeow01051999','tochau113.jpg','tochau113','$2a$10$zHwJEqhEkkk0WQfbY1kCS.mTnnc2DlHMFJKRCYNJ3TaRq0ImtDSq.','ROLE_USER',1,1),(49,'Trần Văn Tèo','','1999-06-12','','teo@gmail.com','','','','thuan2.png','thuan2','$2a$10$gaqgg4de8P4tc1fWtTvV1.oLS9wWMBibtNFPrO6.YH.uSGjPoehuC','ROLE_USER',1,1),(51,'Trần Văn Tâm','','1999-06-12','','thuan4@gmail.com','','','','thuan4.png','thuan4','$2a$10$hJmcGpCfSKZDbUbxDOjKlu8wfGYaAwqFh74NQyuaq6taleYiV/qVG','ROLE_USER',1,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -147,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-21 10:14:07
+-- Dump completed on 2020-10-09 23:30:58

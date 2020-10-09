@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.UserDao;
+import com.entity.Typecv;
 import com.entity.User;
 import com.model.UserDTO;
 import com.service.LikeService;
@@ -34,6 +35,9 @@ public class UserServiceImpl implements UserService{
 		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		user.setRole("ROLE_USER");
 		user.setEnabled((byte)1);
+		Typecv typecv = new Typecv();
+		typecv.setTypecv_ID(1);
+		user.setTypecv(typecv);
 		userDao.addUser(user);
 	}
 
@@ -73,6 +77,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setPassword(user.getPassword());
 		userDTO.setMaxim(user.getMaxim());
 		userDTO.setCareer(user.getCareer());
+		userDTO.setTypecv(user.getTypecv());
 		
 		return userDTO;
 	}
@@ -118,6 +123,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setPassword(user.getPassword());
 		userDTO.setMaxim(user.getMaxim());
 		userDTO.setCareer(user.getCareer());
+		userDTO.setTypecv(user.getTypecv());
 		
 		return userDTO;
 	}
@@ -160,8 +166,11 @@ public class UserServiceImpl implements UserService{
 		userDTO.setFacebook(String.valueOf(user[8]));
 		userDTO.setImageUrl(String.valueOf(user[9]));
 		userDTO.setUsername(String.valueOf(user[10]));
-		userDTO.setLikes((Long) user[11]);
-		
+		userDTO.setTypecv((Typecv) user[11]);
+		if (user.length == 13)
+			userDTO.setLikes((Long) user[12]);
+		else 
+			userDTO.setLikes(0);
 		return userDTO;
 	}
 	
@@ -179,6 +188,31 @@ public class UserServiceImpl implements UserService{
 			listUserDTO.add(userDTO);
 		}
 		return listUserDTO;
+	}
+
+	@Override
+	public void banUser(int id) {
+		User user = userDao.getUserById(id);
+		
+		user.setEnabled((byte) 0); // Banned
+		
+		userDao.updateUser(user);
+	}
+	
+	@Override
+	public void unBanUser(int id) {
+		User user = userDao.getUserById(id);
+		
+		user.setEnabled((byte) 1); // unban
+		
+		userDao.updateUser(user);
+	}
+
+	@Override
+	public void updateUserWithTypecv(UserDTO userDTO) {
+		User user = userDao.getUserById(userDTO.getUser_ID());
+		user.setTypecv(userDTO.getTypecv());
+		userDao.updateUser(user);
 	}
 
 }

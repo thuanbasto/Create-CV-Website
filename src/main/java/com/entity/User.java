@@ -2,6 +2,7 @@ package com.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -41,9 +42,12 @@ public class User implements Serializable {
 
 	private String username;
 
-	//bi-directional many-to-one association to Skill
 	@OneToMany(mappedBy="user")
 	private List<Skill> skills;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="typecv_ID")
+	private Typecv typecv;
 
 	public User() {
 	}
@@ -54,6 +58,14 @@ public class User implements Serializable {
 
 	public int getUser_ID() {
 		return this.user_ID;
+	}
+
+	public Typecv getTypecv() {
+		return typecv;
+	}
+
+	public void setTypecv(Typecv typecv) {
+		this.typecv = typecv;
 	}
 
 	public void setUser_ID(int user_ID) {

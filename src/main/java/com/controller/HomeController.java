@@ -84,7 +84,7 @@ public class HomeController {
 			return "signUp";
 		}
 		userService.addUser(userDTO);
-		return "redirect:/home";
+		return "redirect:/home?signup=success";
 	}
 	
 	@GetMapping("/signIn")

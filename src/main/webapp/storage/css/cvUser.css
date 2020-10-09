@@ -53,3 +53,18 @@ h3 {
     margin: 5px;
     font-weight: 700;
 }
+
+.customize{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    width: fit-content;
+    padding: 5px;
+}
+
+.information {
+    max-width: 35%;
+}
+.detail{
+    max-width: 65%;
+}

@@ -8,7 +8,12 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href='<c:url value="/static/css/home.css"/>'>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 </head>	
+<div class="alert alert-success alert-dismissible d-none">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Sign up success!</strong>
+</div>
 <!-- Masthead-->
 <header class="mt-n5 masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -71,3 +76,4 @@
         </div>
     </div>
 </footer>
+<script src="<c:url value="/static/js/home.js"/>"></script>

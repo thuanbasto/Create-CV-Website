@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,15 +78,42 @@ public class UserController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]") == true)
 			return "redirect:/home";
-	
+
 		UserDTO user = userService.getUserByUserName(authentication.getName());
 		List<SkillDTO> listSkill = skillService.getAllSkillsByUserId(user.getUser_ID());
 		for (SkillDTO skillDTO : listSkill) {
 			skillDTO.setDetailSkills(detailSkillService.getAllDetailSkillsBySkillId(skillDTO.getSkill_ID()));
 		}
 		user.setSkills(listSkill);
-		
+			
 		request.setAttribute("user", user);
+		
+ 		if (user.getTypecv().getTypecv_ID() == 2)
+			return "editCV2";
+		return "editCV";
+	}
+	
+	@GetMapping("/editCV/{typecv}")
+	public String editCVWithParam(HttpServletRequest request,@PathVariable(name="typecv",required=false) int typecv) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]") == true)
+			return "redirect:/home";
+
+		UserDTO user = userService.getUserByUserName(authentication.getName());
+		List<SkillDTO> listSkill = skillService.getAllSkillsByUserId(user.getUser_ID());
+		for (SkillDTO skillDTO : listSkill) {
+			skillDTO.setDetailSkills(detailSkillService.getAllDetailSkillsBySkillId(skillDTO.getSkill_ID()));
+		}
+		user.setSkills(listSkill);
+			
+		request.setAttribute("user", user);
+		
+ 		if (user.getTypecv().getTypecv_ID() == 2 && typecv != 1 && typecv != 2)
+			return "editCV2";
+		if (typecv == 1)
+			return "editCV";
+		else if (typecv == 2)
+			return "editCV2";
 		return "editCV";
 	}
 	
