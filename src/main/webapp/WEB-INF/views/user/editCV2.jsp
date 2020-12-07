@@ -50,8 +50,8 @@
                                 Type CV
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item" value="1" onclick="changeTypeCV(this)">Type CV 1</button>
-                                <button class="dropdown-item" value="2" onclick="changeTypeCV(this)">Type CV 2</button>
+                                <a style="text-decoration: none;" href="<c:url value='/user/editCV/1'/>"><button class="dropdown-item" value="1" onclick="changeTypeCV(this)">Type CV 1</button></a>
+                                <a style="text-decoration: none;" href="<c:url value='/user/editCV/2'/>"><button class="dropdown-item" value="2" onclick="changeTypeCV(this)">Type CV 2</button></a>
                             </div>
                           </div>
                     </li>

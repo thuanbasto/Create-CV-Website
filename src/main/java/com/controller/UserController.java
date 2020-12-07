@@ -58,8 +58,7 @@ public class UserController {
 			try {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 				String fileName = authentication.getName() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-				File newFile = new File("D:\\Training\\SpringMVC\\CV\\src\\main\\webapp\\storage\\image\\" + fileName);
-				System.out.println(newFile.getCanonicalPath());
+				File newFile = new File(request.getServletContext().getRealPath("") +"\\storage\\image\\" + fileName);
 				FileOutputStream fileOutputStream = new FileOutputStream(newFile);
 				fileOutputStream.write(file.getBytes());
 				fileOutputStream.close();
