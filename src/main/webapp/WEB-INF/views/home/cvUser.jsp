@@ -12,6 +12,12 @@
 </head>
 <body>
 	<div class="like bg-white">
+		<c:if test="${user.state == 0}">
+	      	<span class="badge badge-primary">Waiting</span>
+	    </c:if>
+	    <c:if test="${user.state == 1}">
+	      	<span class="badge badge-danger">Working</span>
+      	</c:if>
         <label>${user.likes}</label><span><i class="far fa-thumbs-up"></i></span>
         <security:authorize access="isAuthenticated()">
 			<button type="button" onclick="likeCV(this)" class="btnLike btn btn-primary">Like</button>
@@ -25,48 +31,52 @@
    		<div class="bg-white">
 	        <div class="row m-4 pt-5">
 	        	<input type="hidden" id="user_ID" value="${user.user_ID}">
-	            <div class="col-auto"> 
-	                <img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
-	            </div>
+	        	<c:choose>
+				    <c:when test="${!empty user.imageUrl && user.imageUrl != 'null'}">
+				    	<div class="col-auto"> 
+		                	<img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
+		            	</div>
+				    </c:when>    
+				    <c:otherwise>
+				    	<div class="col-auto"> 
+		                	<img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/default-avatar.jpg"/>">
+		            	</div>
+				    </c:otherwise>
+				</c:choose>
 	            <div class="col ml-3">
-	               	<c:if test="${!empty user.name}">
+	               	<c:if test="${!empty user.name && user.name != 'null'}">
 	               		<h2 class="font-weight-bold">${user.name}</h2>
 	               	</c:if>
-	               	<c:if test="${!empty user.career}">
+	               	<c:if test="${!empty user.career && user.career != 'null'}">
 		                <h4 class="text-primary">${user.career}</h4>
 	               	</c:if>
-	               	<c:if test="${!empty user.maxim}">
+	               	<c:if test="${!empty user.maxim && user.maxim != 'null'}">
 		                <p>${user.maxim}</p>
 	               	</c:if>
 	            </div>
 	        </div>
 	        <ul class="midrow nav justify-content-center">
-	        	<c:if test="${!empty user.email}">
+	        	<c:if test="${!empty user.email && user.email != 'null'}">
 		            <li class="nav-item">
 		                <p class="col-auto ml-4 m-2 text-white"><i class="far fa-envelope"></i> ${user.email}</p>
 		            </li>
 	        	</c:if>
-	        	<c:if test="${!empty user.phone}">
+	        	<c:if test="${!empty user.phone && user.phone != 'null'}">
 		            <li class="nav-item">
 		                <p class="col ml-3 m-2 text-white"><i class="fas fa-mobile-alt"></i> ${user.phone}</p>
 		            </li>
 	        	</c:if>
-	        	<c:if test="${!empty user.address}">
+	        	<c:if test="${!empty user.address && user.address != 'null'}">
 		            <li class="nav-item">
 		                <p class="col ml-3 m-2 text-white"><i class="fas fa-map-marker-alt"></i> ${user.address}</p>
 		            </li>
 	        	</c:if>
-	        	<c:if test="${!empty user.birthday}">
+	        	<c:if test="${!empty user.birthday && user.birthday != 'null'}">
 		            <li class="nav-item">
 		                <p class="col ml-3 m-2 text-white"><i class="far fa-calendar-alt"></i> ${user.birthday}</p>
 		            </li>
 	        	</c:if>
-	  <%--       	<c:if test="${!empty user.facebook}">
-		            <li class="nav-item">
-		                <p class="col-auto m-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p>
-		            </li>
-	        	</c:if> --%>
-	        	<c:if test="${!empty user.facebook}">
+	        	<c:if test="${!empty user.facebook && user.facebook != 'null'}">
 		            <li class="nav-item">
 		                <a href="https://${user.facebook}" target="_blank"><p class="col-auto m-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p></a>
 		            </li>

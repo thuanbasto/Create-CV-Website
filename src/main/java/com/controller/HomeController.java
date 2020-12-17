@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dao.UserDao;
+import com.dao.impl.UserDaoImpl;
 import com.model.LikeDTO;
 import com.model.SkillDTO;
 import com.model.UserDTO;
@@ -62,6 +65,7 @@ public class HomeController {
 				request.setAttribute("checkLike", checkLike);
 				request.setAttribute("user", user);
 			} catch (Exception e) {
+				e.printStackTrace();
 				return "redirect:/home";
 			}
 			
@@ -133,7 +137,41 @@ public class HomeController {
 		request.setAttribute("maxPages", listUser.getPageCount());
 		return "topcv";
 	}
+	
+	
+	@GetMapping("/listcv")
+	public String listcv(HttpServletRequest request) {
+		List<String> careers = userService.getAllCareer();
+		request.setAttribute("careers", careers);
+		return "listcv";
+	}
+	
+	@GetMapping("/listcv/{career}/{age}/{city}")
+	public String listcv(HttpServletRequest request,@PathVariable(name="career") String career,
+			@PathVariable(name="age") int age,@PathVariable(name="city") String city) throws UnsupportedEncodingException {
 
+		career = new String(career.getBytes("iso-8859-1"),"UTF-8");
+		city = new String(city.getBytes("iso-8859-1"),"UTF-8");
+
+		List<UserDTO> listUser = userService.searchCV(career, age, city);
+		List<String> careers = userService.getAllCareer();
+		
+		request.setAttribute("careers", careers);
+		request.setAttribute("listUser", listUser);
+		return "listcv";
+	}
+	
+//	@GetMapping("/listcv")
+//	public String search(HttpServletRequest request,@RequestParam(name="career") String career,
+//			@RequestParam(name="age") int age,@RequestParam(name="city") String city) {
+//		List<UserDTO> listUser = userService.searchCV(career, age, city);
+//		List<String> careers = userService.getAllCareer();
+//		request.setAttribute("careers", careers);
+//		request.setAttribute("listUser", listUser);
+//		return "listcv";
+//	}
+
+	
 	public boolean checkLike(int to_user_ID) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]") != true) {

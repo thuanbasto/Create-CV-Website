@@ -15,7 +15,7 @@
             <div class="navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item m-1">
-                        <div class="icon dropdown">
+                    <!--  <div class="icon dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Icon
                             </button>
@@ -43,7 +43,7 @@
                               <button class="dropdown-item" value="Black" onclick="changeColor(this)">Black</button>
                             </div>
                           </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item m-1">
                         <div class="typecv dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,9 +63,18 @@
     <div class="bg-white">
     	<input type="hidden" id="typecv_ID" value="1">
         <div class="row m-4 pt-5">
-            <div class="col-auto">
-                <img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
-            </div>
+            <c:choose>
+				    <c:when test="${!empty user.imageUrl && user.imageUrl != 'null'}">
+				    	<div class="col-auto"> 
+		                	<img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
+		            	</div>
+				    </c:when>    
+				    <c:otherwise>
+				    	<div class="col-auto"> 
+		                	<img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/default-avatar.jpg"/>">
+		            	</div>
+				    </c:otherwise>
+				</c:choose>
             <div class="col ml-3">
                 <h2 class="font-weight-bold">${user.name}</h2>
                 <h4 class="text-primary ">${user.career}</h4>

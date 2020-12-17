@@ -10,7 +10,7 @@
 	<form action="${url}" method="POST">
 	  <div class="form-group">
 	    <label>Username</label>
-	    <input name="username" class="form-control" placeholder="Enter username" required/>
+	    <input name="username" class="form-control" placeholder="Enter username" autofocus required/>
 	  </div>
 	  <div class="form-group">
 	    <label>Password</label>

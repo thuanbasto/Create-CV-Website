@@ -42,6 +42,8 @@ public class User implements Serializable {
 
 	private String username;
 
+	private Byte state;
+	
 	@OneToMany(mappedBy="user")
 	private List<Skill> skills;
 	
@@ -198,5 +200,15 @@ public class User implements Serializable {
 
 		return skill;
 	}
+
+	public Byte getState() {
+		return state;
+	}
+
+	public void setState(Byte state) {
+		this.state = state;
+	}
+	
+	
 
 }

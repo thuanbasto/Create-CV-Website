@@ -35,18 +35,6 @@ citys.forEach(city => {
 	}
 })
 
-function changeState(el){
-	axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-	let url = document.querySelector(".url").value + "changeState";
-    axios({
-        method: 'POST',
-        url: url,
-        data: {}
-    }).then(log => console.log(log))
-    .catch(error => console.log(error))
-}
-
-
 const editDate = () => {
 	var birthday = document.querySelector("#birthday");
 	birthday.value = birthday.value.replace("-","/");

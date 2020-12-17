@@ -37,6 +37,9 @@
   <definition name="signUp" extends="base-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/home/signUp.jsp"/>
   </definition>
+  <definition name="listcv" extends="base-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/home/listcv.jsp"/>
+  </definition>
   <definition name="signIn" extends="base-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/home/signIn.jsp"/>
   </definition>
@@ -56,5 +59,8 @@
   </definition>
   <definition name="userInformation" extends="admin-difinition">
   	<put-attribute name="body" value="/WEB-INF/views/admin/userInformation.jsp"/>
+  </definition>
+  <definition name="changePassword_Admin" extends="admin-difinition">
+  	<put-attribute name="body" value="/WEB-INF/views/admin/changePassword_Admin.jsp"/>
   </definition>
 </tiles-definitions>

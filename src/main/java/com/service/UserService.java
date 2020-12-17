@@ -19,4 +19,7 @@ public interface UserService {
 	public List<UserDTO> getAllUsersWithLikes();
 	public boolean checkUsername(String username);
 	public void setUserDTO(UserDTO userDTO,UserDTO user);
+	public List<String> getAllCareer();
+	public List<UserDTO> searchCV(String career,int age, String city);
+	public void updateUserWithState(UserDTO userDTO);
 }

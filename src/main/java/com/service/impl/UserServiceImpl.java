@@ -1,9 +1,11 @@
 package com.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,8 @@ public class UserServiceImpl implements UserService{
 		user.setRole("ROLE_USER");
 		user.setEnabled((byte)1);
 		Typecv typecv = new Typecv();
-		typecv.setTypecv_ID(1);
+		typecv.setTypecv_ID(1);	
+		user.setState((byte)0); // waiting for job
 		user.setTypecv(typecv);
 		userDao.addUser(user);
 	}
@@ -50,12 +53,26 @@ public class UserServiceImpl implements UserService{
 		user.setFacebook(userDTO.getFacebook());
 		user.setName(userDTO.getName());
 		user.setPhone(userDTO.getPhone());
-		user.setCareer(userDTO.getCareer());
+		{
+			String career = userDTO.getCareer().toLowerCase(); 
+			career = StringUtils.capitalise(career);
+			user.setCareer(career);
+		}
 		user.setMaxim(userDTO.getMaxim());
 		user.setImageUrl(userDTO.getImageUrl());
 		
 		userDao.updateUser(user);
 	}
+	
+	public void updateUserWithState(UserDTO userDTO) {
+		User user = userDao.getUserById(userDTO.getUser_ID());
+
+		user.setState(userDTO.getState());
+		
+		userDao.updateUser(user);
+	}
+	
+	
 
 	public void deleteUser(int id) {
 		userDao.deleteUser(id);
@@ -78,6 +95,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setMaxim(user.getMaxim());
 		userDTO.setCareer(user.getCareer());
 		userDTO.setTypecv(user.getTypecv());
+		userDTO.setState(user.getState());
 		
 		return userDTO;
 	}
@@ -96,6 +114,7 @@ public class UserServiceImpl implements UserService{
 			userDTO.setName(user.getName());
 			userDTO.setPhone(user.getPhone());
 			userDTO.setUsername(user.getUsername());
+			userDTO.setState(user.getState());
 			
 			listUserDTO.add(userDTO);
 		}
@@ -124,6 +143,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setMaxim(user.getMaxim());
 		userDTO.setCareer(user.getCareer());
 		userDTO.setTypecv(user.getTypecv());
+		userDTO.setState(user.getState());
 		
 		return userDTO;
 	}
@@ -140,6 +160,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setUsername(user.getUsername());
 		userDTO.setMaxim(user.getMaxim());
 		userDTO.setCareer(user.getCareer());
+		userDTO.setState(user.getState());
 	}
 
 	public void updatePassword(UserDTO userDTO) {
@@ -167,8 +188,9 @@ public class UserServiceImpl implements UserService{
 		userDTO.setImageUrl(String.valueOf(user[9]));
 		userDTO.setUsername(String.valueOf(user[10]));
 		userDTO.setTypecv((Typecv) user[11]);
-		if (user.length == 13)
-			userDTO.setLikes((Long) user[12]);
+		userDTO.setState((byte)user[12]);
+		if (user.length == 14)
+			userDTO.setLikes((Long) user[13]);
 		else 
 			userDTO.setLikes(0);
 		return userDTO;
@@ -214,5 +236,60 @@ public class UserServiceImpl implements UserService{
 		user.setTypecv(userDTO.getTypecv());
 		userDao.updateUser(user);
 	}
+
+	@Override
+	public List<String> getAllCareer() {
+		List<String> careers = userDao.getAllCareer();
+		for (int i = 0; i < careers.size(); i++) {
+			String temp = careers.get(i);
+			if (temp == null || "".equals(temp) || temp.isEmpty()) {
+				careers.remove(i);
+			}
+		}
+		return careers;
+	}
+
+	@Override
+	public List<UserDTO> searchCV(String career, int age, String city) {
+		String sql = "from com.entity.User u";
+		boolean checkCareer = false, checkAge = false;
+		
+		if (!"all".equals(career) || age != 0 || !"all".equals(city))
+			sql += " WHERE";
+		if (!"all".equals(career)) {
+			sql += " u.career = '" + career + "'";
+			checkCareer = true;
+		}
+		if (age != 0) {
+			if (checkCareer) sql += " AND";
+			LocalDateTime now = LocalDateTime.now();
+			sql += " " + now.getYear() + " - Year(u.birthday) between 0 AND " + age;
+			checkAge = true;
+		}
+		if (!"all".equals(city)) {
+			if (checkAge || checkCareer) sql += " AND";
+			sql += " u.address = '" + city + "'";
+		}
+		
+		System.out.println(sql);
+		
+		List<User> listUser = userDao.SearchCV(sql);
+		List<UserDTO> listUserDTO = new ArrayList<UserDTO>();
+		
+		for (User user : listUser) {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setAddress(user.getAddress());
+			userDTO.setBirthday(user.getBirthday());
+			userDTO.setName(user.getName());
+			userDTO.setCareer(user.getCareer());
+			userDTO.setUsername(user.getUsername());
+			userDTO.setState(user.getState());
+			
+			listUserDTO.add(userDTO);
+		}
+		
+		return listUserDTO;
+	}
+
 
 }

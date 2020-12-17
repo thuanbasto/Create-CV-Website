@@ -70,16 +70,16 @@ public class UserDaoImpl implements UserDao{
 	public Object[] getUsersWithLikes(String username) {
 		try {
 			Query query = sessionFactory.getCurrentSession()
-					.createQuery("SELECT u.user_ID,u.name,u.address,u.birthday,u.phone,u.email,u.career,u.maxim,u.facebook,u.imageUrl,u.username,u.typecv,Count(l.user1) "
+					.createQuery("SELECT u.user_ID,u.name,u.address,u.birthday,u.phone,u.email,u.career,u.maxim,u.facebook,u.imageUrl,u.username,u.typecv,u.state,Count(l.user1) "
 					+ "FROM com.entity.User u LEFT JOIN com.entity.Like l ON u.user_ID = l.user2 "
 					+ "WHERE u.username =: username "
 					+ "GROUP BY u.user_ID")
 					.setParameter("username", username);
 			Object[] user = (Object[]) query.uniqueResult();
 			
-			if (user == null) {
+			if (user == null) { // ko co like
 				query = sessionFactory.getCurrentSession()
-						.createQuery("SELECT u.user_ID,u.name,u.address,u.birthday,u.phone,u.email,u.career,u.maxim,u.facebook,u.imageUrl,u.username,u.typecv "
+						.createQuery("SELECT u.user_ID,u.name,u.address,u.birthday,u.phone,u.email,u.career,u.maxim,u.facebook,u.imageUrl,u.username,u.typecv,u.state "
 								+ "FROM com.entity.User u "
 								+ "WHERE u.username =: username")
 						.setParameter("username", username);
@@ -107,6 +107,27 @@ public class UserDaoImpl implements UserDao{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public List<String> getAllCareer() {
+		List<String> careers = sessionFactory.getCurrentSession()
+				.createQuery("Select career from com.entity.User group by career").getResultList();
+		return careers;
+	}
+
+	@Override
+	public List<String> getAllCity() {
+		List<String> citys = sessionFactory.getCurrentSession()
+				.createQuery("Select city from com.entity.User group by career").getResultList();
+		return citys;
+	}
+
+	@Override
+	public List<User> SearchCV(String sql) {
+		List<User> listUser = sessionFactory.getCurrentSession()
+				.createQuery(sql).getResultList();
+		return listUser;
 	}
 
 }

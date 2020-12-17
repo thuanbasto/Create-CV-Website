@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light m-0 p-2">
             <div class="navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item m-1">
+                    <!-- <li class="nav-item m-1">
                         <div class="icon dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Icon
@@ -43,7 +43,7 @@
                               <button class="dropdown-item" value="Black" onclick="changeColor(this)">Black</button>
                             </div>
                           </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item m-1">
                         <div class="typecv dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

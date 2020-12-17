@@ -14,4 +14,7 @@ public interface UserDao {
 	public Object[] getUsersWithLikes(String username);
 	public List<Object[]> getAllUsersWithLikes();
 	public boolean checkUsername(String username);
+	public List<String> getAllCareer();
+	public List<String> getAllCity();
+	public List<User> SearchCV(String sql);
 }

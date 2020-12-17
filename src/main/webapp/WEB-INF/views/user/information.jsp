@@ -12,14 +12,20 @@
 		<a href='<c:url value="/user/changePassword"/>'>Change password</a>
 	</div>
 	<div class="col ml-3 pt-3 border border-light bg-white">
+		<input class="url" type="hidden" value='<c:url value="/"/>'>
 		<h2 class="text-primary">Information</h2>
 		<form:form action="${url}" modelAttribute="userDTO" method="POST" cssClass="row" enctype="multipart/form-data">
 			<form:hidden path="user_ID"/>
 			<form:hidden path="imageUrl"/>
 			<div class="col-auto">
-				<div>
-					<img src="<c:url value="/static/image/${userDTO.imageUrl}"/>" id="avatar" width="100px" height="100px" class="rounded-circle"/>
-				</div>
+				<c:choose>
+				    <c:when test="${!empty userDTO.imageUrl && userDTO.imageUrl != 'null'}">
+	                	<img id="avatar" class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${userDTO.imageUrl}"/>">
+				    </c:when>    
+				    <c:otherwise>
+	                	<img id="avatar" class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/default-avatar.jpg"/>">
+				    </c:otherwise>
+				</c:choose>
 				<div class="divUploadFile file btn btn-lg btn-primary mt-2">
       				Upload
                     <form:input type="file" path="file" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])"/>
@@ -42,14 +48,16 @@
 				    <form:input path="phone" class="form-control ml-4"/>
 			  	</div>
 			  	<div class="form-inline mb-3">
-				    <label>Address</label>
+				    <label>City</label>
 				    <span class="span ml-4">${userDTO.address}</span>
-				    <form:input path="address" class="form-control ml-4"/>
+				    <form:select path="address" class="form-control browser-default custom-select listCity ml-4" required="required">
+				    	<form:option value="${userDTO.address}" selected="selected">${userDTO.address}</form:option>
+				    </form:select>
 			  	</div>
 			  	<div class="form-inline mb-3">
 				    <label>Career</label>
 				    <span class="span ml-4">${userDTO.career}</span>
-				    <form:input path="career" class="form-control ml-4"/>
+				    <form:input path="career" class="form-control ml-4" required="required"/>
 			  	</div>
 			  	<div class="form-inline mb-3">
 				    <label>Maxim</label>
@@ -71,6 +79,18 @@
 				    <a class="tagfb ml-4" target="_blank" href="https://${userDTO.facebook}">${userDTO.facebook}</a>
 				    <form:input path="facebook" class="form-control ml-4" placeholder="fb.com/abcxyz"/>
 			  	</div>
+			  	<div class="form-inline mb-3">
+			  		<label>Working</label>
+					<label class="switch ml-3">
+					<c:if test="${userDTO.state == 0}">
+					  <input class="state" onchange="changeState(this)" type="checkbox">
+					</c:if>
+					<c:if test="${userDTO.state == 1}">
+					  <input class="state" onchange="changeState(this)" type="checkbox" checked="checked">
+					</c:if>
+					  <span class="slider round"></span>
+					</label>
+				</div>
 			  	<div class="form-inline pl-5">
 				    <button id="edit" class="btn btn-danger ml-5" >Edit</button>
 				    <button id="cancel" class="btn btn-danger ml-5" >Cancel</button>
@@ -80,5 +100,6 @@
 		</form:form>
 	</div>
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="<c:url value="/static/js/information.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/information.css"/>">

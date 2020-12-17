@@ -42,9 +42,11 @@ public class UserDTO {
 
 	private Typecv typecv;
 	
+	private byte state;
+	
 	public UserDTO() {
 	}
-	
+
 	public UserDTO(int id) {
 		this.user_ID = id;
 	}
@@ -183,5 +185,13 @@ public class UserDTO {
 
 	public void setTypecv(Typecv typecv) {
 		this.typecv = typecv;
+	}
+	
+	public byte getState() {
+		return state;
+	}
+
+	public void setState(byte state) {
+		this.state = state;
 	}
 }

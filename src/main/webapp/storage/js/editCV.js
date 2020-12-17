@@ -14,11 +14,6 @@ function changeColor(el){
 function changeTypeCV(el){
     if (confirm('Are you sure want to change type of CV? Dont forget to click button SaveAll before change.') === false)
         return ;
-//    if (el.value == 1){
-//    	window.location.replace("/CV/user/editCV/1");
-//    } else {
-//    	window.location.replace("/CV/user/editCV/2");
-//    }
 }
 
 saveAll.addEventListener("click", () => {

@@ -17,7 +17,7 @@
 				<a class="nav-link" href="<c:url value='/home'/>">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="https://www.facebook.com/thuanbasto" target="_blank">Contact</a>
+				<a class="nav-link" href="<c:url value='/listcv'/>">Search</a>
 			</li>
 			<security:authorize access="isAuthenticated()">
 				<security:authentication property="principal" var="user" />
@@ -28,6 +28,11 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='/topcv'/>">Top CV</a>
 			</li>
+			<security:authorize access="hasAuthority('ROLE_ADMIN')">
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value='/admin/listUser'/>">Manager</a>
+				</li> 
+			</security:authorize>
 		</ul>
 		<ul class="nav navbar-nav ml-auto">
 			<security:authorize access="!isAuthenticated()">
@@ -46,9 +51,6 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="<c:url value='/user/information'/>">My information</a> 
-							<security:authorize access="hasAuthority('ROLE_ADMIN')">
-							<a class="dropdown-item" href="<c:url value='/admin/listUser'/>">Manager</a> 
-							</security:authorize>
 							<a class="dropdown-item" href="<c:url value='/user/editCV'/>">Edit CV</a> 
 							<a class="dropdown-item" href="<c:url value='/logout'/>">Logout</a>
 						</div>
