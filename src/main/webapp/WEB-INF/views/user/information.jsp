@@ -100,6 +100,7 @@
 		</form:form>
 	</div>
 </div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="<c:url value="/static/vendor/axios/axios.min.js"/>"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script src="<c:url value="/static/js/information.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/information.css"/>">

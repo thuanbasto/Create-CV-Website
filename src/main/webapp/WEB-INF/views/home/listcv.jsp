@@ -68,3 +68,4 @@
 
 <script src='<c:url value="/static/js/listcv.js"></c:url>'></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->

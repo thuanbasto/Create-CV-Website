@@ -12,12 +12,6 @@
 </head>
 <body>
 	<div class="like bg-white">
-		<c:if test="${user.state == 0}">
-	      	<span class="badge badge-primary">Waiting</span>
-	    </c:if>
-	    <c:if test="${user.state == 1}">
-	      	<span class="badge badge-danger">Working</span>
-      	</c:if>
         <label>${user.likes}</label><span><i class="far fa-thumbs-up"></i></span>
         <security:authorize access="isAuthenticated()">
 			<button type="button" onclick="likeCV(this)" class="btnLike btn btn-primary">Like</button>
@@ -27,6 +21,7 @@
 		</security:authorize>
 		<input type="hidden" id="checkLike" value="${checkLike}"> 
     </div>
+    
    	<c:if test="${user.typecv.typecv_ID == 1}">
    		<div class="bg-white">
 	        <div class="row m-4 pt-5">
@@ -53,6 +48,12 @@
 	               	<c:if test="${!empty user.maxim && user.maxim != 'null'}">
 		                <p>${user.maxim}</p>
 	               	</c:if>
+	               	<c:if test="${user.state == 0}">
+				      	<span class="badge badge-primary">Waiting</span>
+				    </c:if>
+				    <c:if test="${user.state == 1}">
+				      	<span class="badge badge-danger">Working</span>
+			      	</c:if>
 	            </div>
 	        </div>
 	        <ul class="midrow nav justify-content-center">
@@ -214,7 +215,8 @@
 	    </div>
    	</c:if>
     <script src='<c:url value="/static/js/cvUser.js"></c:url>'></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="<c:url value="/static/vendor/axios/axios.min.js"/>"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 </body>
 </html>

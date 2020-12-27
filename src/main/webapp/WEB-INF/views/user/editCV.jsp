@@ -179,7 +179,8 @@
         </div>
     </div>
     <script src="<c:url value="/static/js/editCV.js"/>"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="<c:url value="/static/vendor/axios/axios.min.js"/>"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 </body>
 </html>
