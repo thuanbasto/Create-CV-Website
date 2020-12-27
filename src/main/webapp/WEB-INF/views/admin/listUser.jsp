@@ -4,6 +4,7 @@
 
 <head>
 	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+	<%-- <link rel="stylesheet" href="<c:url value="/static/vendor/datatables/jquery.dataTables.min.css"/>"> --%>
 </head>
 <div class="container-fluid">
 
@@ -67,7 +68,10 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<c:url value="/static/vendor/jquery/jquery.min.js"/>"></script>
+<script src="<c:url value="/static/vendor/jquery/jquery.slim.min.js"/>"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 <script src='<c:url value="/static/js/listUser.js"></c:url>'></script>

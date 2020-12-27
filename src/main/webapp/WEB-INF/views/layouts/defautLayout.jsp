@@ -8,7 +8,8 @@
 <head>	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="<c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/>">
 	<link rel="icon" href="<c:url value="/static/image/icon.png"/>">
 	<title>CV Online</title>
 	<meta name="description" content="Create CV Online" />
@@ -19,9 +20,11 @@
 	<div class="container pt-3">
 		<tiles:insertAttribute name="body"/>
 	</div>
-	<!-- Bootstrap -->
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script> -->
+	<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script> -->
+
+	<script src="<c:url value="/static/vendor/jquery/jquery.slim.min.js"/>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="<c:url value="/static/vendor/bootstrap/js/bootstrap.min.js"/>"></script>
 </body>
 </html>
