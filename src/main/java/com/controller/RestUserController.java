@@ -1,6 +1,5 @@
 package com.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.Typecv;
-import com.entity.User;
 import com.model.UserDTO;
 import com.service.UserService;
 

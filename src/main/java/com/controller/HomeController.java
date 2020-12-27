@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dao.UserDao;
-import com.dao.impl.UserDaoImpl;
 import com.model.LikeDTO;
 import com.model.SkillDTO;
 import com.model.UserDTO;

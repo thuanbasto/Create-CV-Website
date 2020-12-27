@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService{
 		userDao.addUser(user);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void updateUser(UserDTO userDTO) {
 		User user = userDao.getUserById(userDTO.getUser_ID());
 
@@ -171,12 +172,11 @@ public class UserServiceImpl implements UserService{
 		userDao.updateUser(user);
 	}
 
-	@Override
 	public UserDTO getUsersWithLikes(String username) {
 		Object[] user = userDao.getUsersWithLikes(username);
 		UserDTO userDTO = new UserDTO();
 		
-		userDTO.setUser_ID((int) user[0]);
+		userDTO.setUser_ID(Integer.parseInt(String.valueOf(user[0])));
 		userDTO.setName(String.valueOf(user[1]));
 		userDTO.setAddress(String.valueOf(user[2]));
 		userDTO.setBirthday((Date) user[3]);
@@ -188,9 +188,9 @@ public class UserServiceImpl implements UserService{
 		userDTO.setImageUrl(String.valueOf(user[9]));
 		userDTO.setUsername(String.valueOf(user[10]));
 		userDTO.setTypecv((Typecv) user[11]);
-		userDTO.setState((byte)user[12]);
+		userDTO.setState(Byte.parseByte(String.valueOf(user[12])));
 		if (user.length == 14)
-			userDTO.setLikes((Long) user[13]);
+			userDTO.setLikes(Long.parseLong(String.valueOf(user[13])));
 		else 
 			userDTO.setLikes(0);
 		return userDTO;
@@ -201,43 +201,41 @@ public class UserServiceImpl implements UserService{
 		List<UserDTO> listUserDTO = new ArrayList<UserDTO>();
 		for (Object[] user : listUser) {
 			UserDTO userDTO = new UserDTO();
-			userDTO.setUser_ID((int) user[0]);  // ID
+			userDTO.setUser_ID(Integer.parseInt(String.valueOf(user[0])));  // ID
 			userDTO.setName(String.valueOf(user[1]));  // name
 			userDTO.setUsername(String.valueOf(user[2])); // username
 			userDTO.setEmail(String.valueOf(user[3])); // email
-			userDTO.setLikes((long) user[4]);; // like
+			userDTO.setLikes(Long.parseLong(String.valueOf(user[4]))); // like
 			
 			listUserDTO.add(userDTO);
 		}
 		return listUserDTO;
 	}
 
-	@Override
-	public void banUser(int id) {
-		User user = userDao.getUserById(id);
-		
-		user.setEnabled((byte) 0); // Banned
-		
-		userDao.updateUser(user);
-	}
-	
-	@Override
-	public void unBanUser(int id) {
-		User user = userDao.getUserById(id);
-		
-		user.setEnabled((byte) 1); // unban
-		
-		userDao.updateUser(user);
-	}
+//	@Override
+//	public void banUser(int id) {
+//		User user = userDao.getUserById(id);
+//		
+//		user.setEnabled((byte) 0); // Banned
+//		
+//		userDao.updateUser(user);
+//	}
+//	
+//	@Override
+//	public void unBanUser(int id) {
+//		User user = userDao.getUserById(id);
+//		
+//		user.setEnabled((byte) 1); // unban
+//		
+//		userDao.updateUser(user);
+//	}
 
-	@Override
 	public void updateUserWithTypecv(UserDTO userDTO) {
 		User user = userDao.getUserById(userDTO.getUser_ID());
 		user.setTypecv(userDTO.getTypecv());
 		userDao.updateUser(user);
 	}
 
-	@Override
 	public List<String> getAllCareer() {
 		List<String> careers = userDao.getAllCareer();
 		for (int i = 0; i < careers.size(); i++) {
@@ -249,7 +247,6 @@ public class UserServiceImpl implements UserService{
 		return careers;
 	}
 
-	@Override
 	public List<UserDTO> searchCV(String career, int age, String city) {
 		String sql = "from com.entity.User u";
 		boolean checkCareer = false, checkAge = false;
@@ -289,6 +286,16 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return listUserDTO;
+	}
+
+	public void banUser(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void unBanUser(int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

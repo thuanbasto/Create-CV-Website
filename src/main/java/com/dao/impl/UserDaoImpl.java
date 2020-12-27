@@ -109,22 +109,22 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
-	@Override
 	public List<String> getAllCareer() {
+		@SuppressWarnings("unchecked")
 		List<String> careers = sessionFactory.getCurrentSession()
 				.createQuery("Select career from com.entity.User group by career").getResultList();
 		return careers;
 	}
 
-	@Override
 	public List<String> getAllCity() {
+		@SuppressWarnings("unchecked")
 		List<String> citys = sessionFactory.getCurrentSession()
 				.createQuery("Select city from com.entity.User group by career").getResultList();
 		return citys;
 	}
 
-	@Override
 	public List<User> SearchCV(String sql) {
+		@SuppressWarnings("unchecked")
 		List<User> listUser = sessionFactory.getCurrentSession()
 				.createQuery(sql).getResultList();
 		return listUser;

@@ -15,7 +15,6 @@ public class TypecvDaoImpl implements TypecvDao{
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	@Override
 	public Typecv getTypeCVById(int id) {
 		return (Typecv) sessionFactory.getCurrentSession().get(Typecv.class, id);
 	}

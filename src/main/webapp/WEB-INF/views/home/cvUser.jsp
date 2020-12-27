@@ -143,24 +143,47 @@
 	                <div class="col information">
 	                    <div class="row m-4">
 	                        <div class="row-auto ml-3">
-	                            <img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
+	                        <c:choose>
+		                    <c:when test="${!empty user.imageUrl && user.imageUrl != 'null'}">
+				                	<img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/${user.imageUrl}"/>">
+						    </c:when>    
+						    <c:otherwise>
+				                	<img class="rounded-circle" width="120px" height="120px" src="<c:url value="/static/image/default-avatar.jpg"/>">
+						    </c:otherwise>
+						    </c:choose>
 	                        </div>
 	                    </div>
 	                    <div class="row-auto ml-3">
 	                        <div class="row-auto">
 	                        	<input type="hidden" id="user_ID" value="${user.user_ID}">
-	                            <h2 class="row name font-weight-bold">${user.name}</h2>
-	                            <h4 class="row text-primary ">${user.career}</h4>
-	                            <p class="row">${user.maxim}</p>
+	                        	<c:if test="${!empty user.name && user.name != 'null'}">
+	                            	<h2 class="row name font-weight-bold">${user.name}</h2>
+	                            </c:if>
+	                            <c:if test="${!empty user.career && user.career != 'null'}">
+	                            	<h4 class="row text-primary ">${user.career}</h4>
+	                            </c:if>
+	                            <c:if test="${!empty user.maxim && user.maxim != 'null'}">
+	                            	<p class="row">${user.maxim}</p>
+	                            </c:if>
 	                        </div>
 	                    </div>
 	                    <div class="row mb-3">
 	                        <div class="midrow ml-4 border rounded">
-	                            <p class="ml-4 mt-2 mr-4 text-white"><i class="far fa-envelope"></i> ${user.email}</p>
-	                            <p class="ml-4 mt-2 mr-4 text-white"><i class="fas fa-mobile-alt"></i> ${user.phone}</p>
-	                            <p class="ml-4 mt-2 mr-4 text-white"><i class="fas fa-map-marker-alt"></i> ${user.address}</p>
-	                            <p class="ml-4 mt-2 mr-4 text-white"><i class="far fa-calendar-alt"></i> ${user.birthday}</p>
-	                            <p class="ml-4 mt-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p>
+	                        	<c:if test="${!empty user.email && user.email != 'null'}">
+	                            	<p class="ml-4 mt-2 mr-4 text-white"><i class="far fa-envelope"></i> ${user.email}</p>
+	                            </c:if>
+	                            <c:if test="${!empty user.phone && user.phone != 'null'}">
+	                            	<p class="ml-4 mt-2 mr-4 text-white"><i class="fas fa-mobile-alt"></i> ${user.phone}</p>
+	                            </c:if>
+	                            <c:if test="${!empty user.address && user.address != 'null'}">
+	                            	<p class="ml-4 mt-2 mr-4 text-white"><i class="fas fa-map-marker-alt"></i> ${user.address}</p>
+	                            </c:if>
+	                            <c:if test="${!empty user.birthday && user.birthday != 'null'}">
+	                            	<p class="ml-4 mt-2 mr-4 text-white"><i class="far fa-calendar-alt"></i> ${user.birthday}</p>
+	                            </c:if>
+	                            <c:if test="${!empty user.facebook && user.facebook != 'null'}">
+	                            	<p class="ml-4 mt-2 mr-4 text-white"><i class="fab fa-facebook-f"></i> ${user.facebook}</p>
+	                            </c:if>
 	                        </div>
 	                    </div>
 	                </div>
